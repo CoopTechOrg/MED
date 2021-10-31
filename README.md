@@ -1,16 +1,14 @@
 ## アイデア
 
-TW的なPRG作るよ
+医療費控除金額計算アプリ
+
+医療費控除 = medical expenses deduction
+
+略して"med"をアプリ名（仮）とした
 
 ## 決まってること
 
-- SPA(Laravel / Vue / ts / docker)
-
-## Vue 3 + ts
-### インストールはこちらを利用
-[インストール](https://px-wing.hatenablog.com/entry/2020/11/12/065719)
-
-[【メモ】Vue CLI でホットリロードが効かない](https://qiita.com/ntm718/items/6023b0063f78d53192a1)
+- SPA(Laravel / Vue2 / ts / docker)
 
 ### Router
 
@@ -36,29 +34,29 @@ WSL上で動かしているためWSLのターミナルからchmodなど叩かな
 ### js
 #### wsl
 ```bash
-docker-compose exec rpg-front bash
+docker-compose exec med-front bash
 ```
 
 #### docker
 ```bash
-vue create eduit-rpg
+vue create med
 ```
 
 ### laravel
 
 ```bash
-docker-compose exec rpg-app composer create-project --prefer-dist "laravel/laravel=6.*" .
-docker-compose exec rpg-app chmod 777 -R storage
+docker-compose exec med-app composer create-project --prefer-dist "laravel/laravel=6.*" .
+docker-compose exec med-app chmod 777 -R storage
 ```
 ## ビルトインサーバ起動方法
 ### js
 #### wsl
 ```bash
-docker-compose exec rpg-front sh
+docker-compose exec med-front bash
 ```
 
 #### docker
 ```bash
-cd eduit-rpg
+cd med
 npm run serve
 ```
