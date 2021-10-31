@@ -10,8 +10,6 @@ RUN apt-get install -y sudo
 RUN usermod  -u 1001 node
 RUN groupmod -g 1001 node
 
-WORKDIR /app
-
 # Windows 専用
 ENV USER docker
 ARG GID
