@@ -10,12 +10,6 @@
 
 - SPA(Laravel / Vue2 / ts / docker)
 
-### Router
-
-`npm install vue-router@4`
-
-`vue add router`
-
 ## デプロイ構成
 
 [デプロイ構成](https://s8a.jp/vue-js-github-aws-s3-auto-deploy)
