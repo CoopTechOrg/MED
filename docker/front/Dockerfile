@@ -24,9 +24,10 @@ RUN echo "${USER}:passwd" | chpasswd
 
 WORKDIR /
 
+RUN mkdir /app
+
 # 俺にもファイル作らせろや権限
 RUN chmod -R 777 /app
-RUN chown docker /app
 
 WORKDIR /app
 USER ${USER}
