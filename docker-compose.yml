@@ -46,4 +46,4 @@ services:
       - med-app
 
 networks:
-  techool_nw:
+  med_nw:
