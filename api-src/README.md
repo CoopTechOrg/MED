@@ -76,3 +76,43 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## カスタマイズ
+
+### Laravel Passport
+
+```bash 
+docker-compose exec med-app composer require laravel/passport:9.4.0
+docker-compose exec med-app php artisan migrate
+docker-compose exec med-app php artisan passport:install
+```
+
+### mysql対応
+
+```php 
+// app\Providers\AppServiceProvider.php
+use Illuminate\Support\Facades\Schema;
+
+public function boot()
+{
+    Schema::defaultStringLength(191);
+}
+```
+
+### cors
+
+```bash 
+docker-compose exec med-app composer require fruitcake/laravel-cors
+docker-compose exec med-app php artisan vendor:publish --tag="cors"
+```
+
+#### 注意
+
+`barryvdh` -> `fruitcake`
+
+#### 参考リンク
+
+[LaravelでAccess-Control-Expose-Headersを設定する場合はfruitcake/laravel-corsが便利！](https://webty.jp/staffblog/production/post-3595/)
+
+[Laravel で CORS に対応して開発マシンから axios などでリクエストを送信できるようにする](https://www.pgmemo.tokyo/data/archives/1669.html)
+
