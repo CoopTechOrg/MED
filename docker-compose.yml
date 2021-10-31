@@ -1,0 +1,49 @@
+version: '3.3'
+services:
+  med-front:
+    container_name: med-front
+    build:
+      context: ./docker/front/
+      args:
+        - UID=${UID}
+        - GID=${GID}
+    volumes:
+      - ./front-src:/app
+    ports:
+      - "8080:8080"
+    tty: true
+
+  med-app:
+    container_name: med-app
+    build:
+      context: ./docker/app/
+      args:
+        UID: ${UID}
+        GID: ${GID}
+    volumes:
+      - ./api-src:/src
+      - ./docker/app/php.ini:/usr/local/etc/php/php.ini
+    environment:
+      # laravelの.envを上書きするので注意
+      - DB_CONNECTION=mysql
+      - DB_HOST=${DB_HOST}
+      - DB_POST=${DB_PORT}
+      - DB_DATABASE=${DB_NAME}
+      - DB_USERNAME=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+    restart: always
+
+  med-web:
+    container_name: med-web
+    build: ./docker/web
+    volumes:
+      - ./api-src:/src
+      - ./docker/web/conf.d:/etc/nginx/conf.d
+      - ./docker/web/log:/var/log/nginx/
+    ports:
+      - ${WEB_PORT}:80
+    depends_on:
+      - med-app
+
+networks:
+  techool_nw:
