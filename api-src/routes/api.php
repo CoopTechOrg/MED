@@ -18,8 +18,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::group(['middleware' => ['auth:api']], function () {
-    Route::apiResource('drugstore', 'Api\DrugstoreController');
-    Route::apiResource('hospital', 'Api\HospitalController');
+    Route::apiResource('family', 'Api\FamilyController');
+    Route::apiResource('payee', 'Api\PayeeController');
+    Route::apiResource('insurance-company', 'Api\InsuranceCompanyController');
     Route::apiResource('payment', 'Api\PaymentController');
 });
 
