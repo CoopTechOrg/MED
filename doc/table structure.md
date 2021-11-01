@@ -33,6 +33,7 @@
 |----|----|----|----|----|
 |paid_at|支払日|timestamp|
 |payee_id|支払先|unsignedBigInteger|
+|family_id|支払者|unsignedBigInteger|
 |is_deducted|控除されるかどうか|boolean|true: 3割負担, false: 10割負担
 |is_own_expensed|自費か、保険からの出費か|boolean|true: 自費, false: 保険|自費
 |insurance_company_id|保険会社|unsignedBigInteger
