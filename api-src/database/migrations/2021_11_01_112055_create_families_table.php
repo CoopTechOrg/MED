@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDrugstoresTable extends Migration
+class CreateFamiliesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateDrugstoresTable extends Migration
      */
     public function up()
     {
-        Schema::create('drugstores', function (Blueprint $table) {
+        Schema::create('families', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
+            $table->string('name')->comment('家族の名前');
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ class CreateDrugstoresTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('drugstores');
+        Schema::dropIfExists('families');
     }
 }
