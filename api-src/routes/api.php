@@ -23,4 +23,3 @@ Route::group(['middleware' => ['auth:api']], function () {
     Route::apiResource('insurance-company', 'Api\InsuranceCompanyController');
     Route::apiResource('payment', 'Api\PaymentController');
 });
-
