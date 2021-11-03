@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\InsuranceCompany;
 use App\Models\Payment;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -18,7 +19,17 @@ class InsuranceCompanyController extends Controller
      */
     public function index(): Collection
     {
-        return InsuranceCompany::all();
+        $columns = [
+            'insurance_companies.*',
+            'is_used' => function (Builder $query) {
+                $query
+                    ->selectRaw('CASE WHEN insurance_company_id IS NOT NULL THEN true ELSE false END AS is_used')
+                    ->from('payments')
+                    ->whereRaw('payments.insurance_company_id = insurance_companies.id')
+                    ->distinct();
+            },
+        ];
+        return InsuranceCompany::select($columns)->get();
     }
 
     /**

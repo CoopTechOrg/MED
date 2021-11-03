@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Payee;
 use App\Models\Payment;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -18,7 +19,17 @@ class PayeeController extends Controller
      */
     public function index(): Collection
     {
-        return Payee::all();
+        $columns = [
+            'payees.*',
+            'is_used' => function (Builder $query) {
+                $query
+                    ->selectRaw('CASE WHEN payee_id IS NOT NULL THEN true ELSE false END AS is_used')
+                    ->from('payments')
+                    ->whereRaw('payments.payee_id = payees.id')
+                    ->distinct();
+            },
+        ];
+        return Payee::select($columns)->get();
     }
 
     /**

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Family;
 use App\Models\Payment;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -18,7 +19,17 @@ class FamilyController extends Controller
      */
     public function index(): Collection
     {
-        return Family::all();
+        $columns = [
+            'families.*',
+            'is_used' => function (Builder $query) {
+                $query
+                    ->selectRaw('CASE WHEN family_id IS NOT NULL THEN true ELSE false END AS is_used')
+                    ->from('payments')
+                    ->whereRaw('payments.family_id = families.id')
+                    ->distinct();
+            },
+        ];
+        return Family::select($columns)->get();
     }
 
     /**
