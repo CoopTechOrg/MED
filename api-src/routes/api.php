@@ -22,4 +22,6 @@ Route::group(['middleware' => ['auth:api']], function () {
     Route::apiResource('payee', 'Api\PayeeController');
     Route::apiResource('insurance-company', 'Api\InsuranceCompanyController');
     Route::apiResource('payment', 'Api\PaymentController');
+    Route::apiResource('payment', 'Api\PaymentController');
+    Route::get('/payment-summary/payee', 'Api\PaymentController@showPayeeSummary');
 });

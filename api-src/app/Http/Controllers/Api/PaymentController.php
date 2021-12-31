@@ -95,4 +95,34 @@ class PaymentController extends Controller
         Payment::destroy($id);
         return response()->json();
     }
+
+    /**
+     * 支払先別集計
+     *
+     * @return Collection
+     */
+    public function showPayeeSummary(): Collection
+    {
+        $query = Payment::query()
+            ->join("payees", "payees.id", "=", "payments.payee_id")
+            ->select(["payments.payee_id", "payees.name AS payee_name"])
+            ->selectRaw("SUM(payments.price) AS total")
+            ->groupBy(["payments.payee_id", "payees.name"]);
+        return $query->get();
+    }
+
+    /**
+     * 家族別集計
+     *
+     * @return Collection
+     */
+    public function showFamilySummary(): Collection
+    {
+        $query = Payment::query()
+            ->join("families", "families.id", "=", "payments.family_id")
+            ->select(["payments.family_id", "families.name AS family_name"])
+            ->selectRaw("SUM(payments.price) AS total")
+            ->groupBy(["payments.family_id", "families.name"]);
+        return $query->get();
+    }
 }
