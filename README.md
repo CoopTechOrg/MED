@@ -6,6 +6,10 @@
 
 略して"med"をアプリ名（仮）とした
 
+## リポジトリ
+
+https://github.com/CoopTechOrg/MED
+
 ## 仕様概略
 
 - 毎年医療費控除の計算が面倒
@@ -74,3 +78,7 @@ npm run serve
 ## ポート番号
 
 `.env` と `fromt-src/.env`のポート番号は合わせてください
+
+### ダミーデータ
+
+hoge@example.com / password
